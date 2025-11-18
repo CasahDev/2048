@@ -12,9 +12,9 @@ class GrilleVM {
     Grille grille_;
 
 public:
-    GrilleVM(Grille grille);
+    explicit GrilleVM(Grille grille);
 
-    std::unordered_map<Coordinates, std::optional<CaseVM>> get_cases();
+    std::unordered_map<Coordinates, std::optional<CaseVM>> get_cases() const ;
 };
 
 
