@@ -22,18 +22,20 @@ class Grille
     int height_;
     std::unordered_map<Coordinates, std::optional<Case>> cases_;
 
-    int max_;
+    long max_;
 
-    void insert_new_value();
+
+    void check_for_loose();
     void swipe_vertically(bool up);
     void swipe_horizontally(bool right);
 public:
     Grille(int width, int height);
     void swipe(Direction direction);
+    void insert_new_value();
 
     friend std::ostream& operator<<(std::ostream &os, const Grille& g);
 
-    std::unordered_map<Coordinates, std::optional<Case>> get_cases();
+    std::unordered_map<Coordinates, std::optional<Case>> get_cases() const;
 };
 
 
