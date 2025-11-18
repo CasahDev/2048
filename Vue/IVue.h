@@ -8,7 +8,12 @@
 #include "../Model/Direction.h"
 
 class IVue {
+public:
+    virtual ~IVue() = default;
+
+private:
     virtual void move(Direction direction);
+    virtual void Display();
 };
 
 

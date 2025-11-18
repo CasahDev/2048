@@ -17,4 +17,6 @@ add_executable(TD2 main.cpp
         ViewModel/CaseVM.h
         Vue/IVue.cpp
         Vue/IVue.h
+        Vue/ConsoleVue.cpp
+        Vue/ConsoleVue.h
 )
