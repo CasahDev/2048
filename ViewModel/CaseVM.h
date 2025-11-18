@@ -12,7 +12,7 @@ class CaseVM {
 
 public:
     explicit CaseVM(Case c);
-    long get_value();
+    long get_value() const;
 };
 
 

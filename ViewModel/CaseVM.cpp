@@ -4,9 +4,9 @@
 
 #include "CaseVM.h"
 
-CaseVM::CaseVM(Case c) : c_(c) {
+CaseVM::CaseVM(const Case c) : c_(c) {
 }
 
-long CaseVM::get_value() {
+long CaseVM::get_value() const {
     return c_.get_value();
 }
