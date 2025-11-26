@@ -2,9 +2,6 @@
 // Created by sacha on 17/11/2025.
 //
 
-#ifndef TD2_COORDINATES_H
-#define TD2_COORDINATES_H
-
 #pragma once
 
 #include <functional>
@@ -20,20 +17,5 @@ public:
     [[nodiscard]] int get_x() const;
     [[nodiscard]] int get_y() const;
 
-    bool operator==(const Coordinates &c) const {
-        return x_ == c.get_x() && y_ == c.get_y();
-    }
+    bool operator==(const Coordinates &c) const;
 };
-
-namespace std {
-    template<>
-    struct hash<Coordinates> {
-        std::size_t operator()(Coordinates const& c) const noexcept {
-            // combinaison simple et sans état, donc copy-constructible
-            // 31 est un petit mix; on peut remplacer par un meilleur mix si besoin
-            return (static_cast<std::size_t>(c.get_x()) * 31u) ^ static_cast<std::size_t>(c.get_y());
-        }
-    };
-}
-
-#endif //TD2_COORDINATES_H
