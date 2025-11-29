@@ -8,14 +8,14 @@
 #include <functional>
 
 class Coordinates {
-    int x_;
-    int y_;
+    unsigned int x_;
+    unsigned int y_;
 
 public:
-    Coordinates(int x, int y);
+    Coordinates(unsigned int x, unsigned int y);
 
-    [[nodiscard]] int get_x() const;
-    [[nodiscard]] int get_y() const;
+    [[nodiscard]] unsigned int get_x() const;
+    [[nodiscard]] unsigned int get_y() const;
 
     bool operator==(const Coordinates &c) const;
 };

@@ -4,14 +4,14 @@
 
 #include "Coordinates.h"
 
-Coordinates::Coordinates(const int x, const int y) : x_(x), y_(y) {
+Coordinates::Coordinates(const unsigned int x, const unsigned int y) : x_(x), y_(y) {
 }
 
-int Coordinates::get_x() const {
+unsigned int Coordinates::get_x() const {
     return x_;
 }
 
-int Coordinates::get_y() const {
+unsigned int Coordinates::get_y() const {
     return y_;
 }
 
