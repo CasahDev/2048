@@ -21,26 +21,30 @@ Grille::Grille(const unsigned int width, const unsigned int height) : width_(wid
     }
 }
 
-void Grille::move(const Direction direction) {
+unsigned long Grille::move(const Direction direction) {
+    unsigned long maxCombinedValue;
     if (direction == Direction::Up || direction == Direction::Down) {
-        swipe(width_, height_, direction == Direction::Up,
+        maxCombinedValue = swipe(width_, height_, direction == Direction::Up,
                 [this](const int moving, const int fixed) {
                     // Vertical: moving = ligne (y), fixed = colonne (x)
                     return Coordinates(fixed, moving);
                 }
             );
     } else {
-        swipe(height_, width_, direction != Direction::Right,
+        maxCombinedValue = swipe(height_, width_, direction != Direction::Right,
                 [this](const int moving, const int fixed) {
                     // Horizontal: moving = colonne (x), fixed = ligne (y)
                     return Coordinates(moving, fixed);
                 }
             );
     }
+    return maxCombinedValue;
 }
 
-void Grille::swipe(const int outer_limit, const int inner_limit, const bool pack_to_start,
-                          const std::function<Coordinates(int, int)>& get_coords) {
+unsigned long Grille::swipe(const int outer_limit, const int inner_limit, const bool pack_to_start,
+                            const std::function<Coordinates(int, int)> &get_coords) {
+
+    unsigned long maxCombinedValue = 0;
 
     // pack_to_start = true  -> On tasse vers l'index 0 (Haut ou Gauche)
     // pack_to_start = false -> On tasse vers l'index Max (Bas ou Droite)
@@ -71,6 +75,7 @@ void Grille::swipe(const int outer_limit, const int inner_limit, const bool pack
 
                 if (neighbor) {
                     if (auto new_case = c->combine(neighbor.value()); new_case.has_value()) {
+                        if (maxCombinedValue < new_case->get_value()) maxCombinedValue = new_case->get_value();
                         cases_.erase(currentPos);
                         cases_.emplace(currentPos, new_case);
                         cases_.erase(neighborPos);
@@ -98,6 +103,8 @@ void Grille::swipe(const int outer_limit, const int inner_limit, const bool pack
             }
         }
     }
+
+    return maxCombinedValue;
 }
 
 std::unordered_map<Coordinates, std::optional<Case> > Grille::get_cases() const {

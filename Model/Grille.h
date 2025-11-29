@@ -18,15 +18,15 @@ class Grille {
     unsigned int height_;
     std::unordered_map<Coordinates, std::optional<Case>> cases_;
 
-    void swipe(int outer_limit, int inner_limit, bool pack_to_start,
-                          const std::function<Coordinates(int, int)>& get_coords);
+    unsigned long swipe(int outer_limit, int inner_limit, bool pack_to_start,
+                        const std::function<Coordinates(int, int)> &get_coords);
     bool has_space() const;
 public:
     Grille(unsigned int width, unsigned int height);
     unsigned long init();
 
 
-    void move(Direction direction);
+    unsigned long move(Direction direction);
     unsigned long insert_new_value();
 
     unsigned int get_width() const;
