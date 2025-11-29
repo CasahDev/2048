@@ -28,3 +28,7 @@ bool GameVM::check_for_loose() const {
     return game_.check_for_loose();
 }
 
+bool GameVM::check_for_win() const {
+    return game_.check_for_win();
+}
+

@@ -19,4 +19,6 @@ public:
     void swipe(Direction direction);
 
     bool check_for_loose() const;
+
+    bool check_for_win() const;
 };
