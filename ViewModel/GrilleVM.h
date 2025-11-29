@@ -1,20 +1,21 @@
 //
-// Created by sacha on 17/11/2025.
+// Created by sacha on 29/11/2025.
 //
 
 #ifndef TD2_GRILLEVM_H
 #define TD2_GRILLEVM_H
 
-#include "CaseVM.h"
 #include "../Model/Grille.h"
 
 class GrilleVM {
     Grille grille_;
 
 public:
-    explicit GrilleVM(Grille grille);
-
-    std::unordered_map<Coordinates, std::optional<CaseVM>> get_cases() const ;
+    GrilleVM(Grille grille);
+    
+    unsigned int get_width() const;
+    unsigned int get_height() const;
+    std::unordered_map<Coordinates, std::optional<Case>> get_cases() const;
 };
 
 

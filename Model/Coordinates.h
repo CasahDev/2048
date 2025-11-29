@@ -4,8 +4,8 @@
 
 #pragma once
 
+#include <cstddef>
 #include <functional>
-
 
 class Coordinates {
     int x_;
@@ -19,3 +19,13 @@ public:
 
     bool operator==(const Coordinates &c) const;
 };
+
+
+namespace std {
+    template<>
+    struct hash<Coordinates> {
+        std::size_t operator()(Coordinates const &c) const noexcept {
+            return (static_cast<std::size_t>(c.get_x()) * 31u) ^ static_cast<std::size_t>(c.get_y());
+        }
+    };
+}

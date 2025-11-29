@@ -1,17 +1,21 @@
 #include <iostream>
 
 #include "Model/Direction.h"
+#include "Model/Game.h"
 #include "Model/Grille.h"
+#include "Vue/ConsoleVue.h"
 
 int main() {
 
-    Grille g(5, 5);
+    Game g;
 
-    std::cout << g << std::endl;
+    const GameVM game_vm(g);
 
-    g.swipe(Direction::Right);
+    ConsoleVue vue(game_vm);
 
-    std::cout << g << std::endl;
+    vue.Display();
 
+    vue.move(Direction::Left);
+    vue.Display();
     return 0;
 }

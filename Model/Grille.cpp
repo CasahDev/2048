@@ -10,9 +10,8 @@
 #include <ostream>
 #include <random>
 #include <ranges>
-#include <stdexcept>
 
-Grille::Grille(int width, int height) : width_(width), height_(height), cases_() {
+Grille::Grille(const unsigned int width, const unsigned int height) : width_(width), height_(height) {
     for (int i = 0; i < height_; i++) {
         for (int j = 0; j < width_; j++) {
             Coordinates coordinates(j, i);
@@ -20,11 +19,9 @@ Grille::Grille(int width, int height) : width_(width), height_(height), cases_()
             cases_.emplace(coordinates, c);
         }
     }
-
-    max_ = 2;
 }
 
-void Grille::swipe(const Direction direction) {
+unsigned long Grille::swipe(const Direction direction) {
     if (direction == Direction::Up || direction == Direction::Down) {
         swipe_vertically(direction == Direction::Up);
     } else {
@@ -32,10 +29,10 @@ void Grille::swipe(const Direction direction) {
     }
 
     check_for_loose();
-    insert_new_value();
+    return insert_new_value();
 }
 
-std::unordered_map<Coordinates, std::optional<Case>> Grille::get_cases() const {
+std::unordered_map<Coordinates, std::optional<Case> > Grille::get_cases() const {
     return cases_;
 }
 
@@ -58,10 +55,6 @@ void Grille::swipe_vertically(const bool up) {
 
                 if (c2) {
                     if (std::optional<Case> new_case = c->combine(c2.value()); new_case.has_value()) {
-                        if (new_case->get_value() > max_) {
-                            max_ = new_case->get_value();
-                        }
-
                         cases_.emplace(coordinates, new_case);
                         j = k;
                         std::optional<Case> empty;
@@ -104,10 +97,6 @@ void Grille::swipe_horizontally(const bool right) {
 
                 if (c2) {
                     if (std::optional<Case> new_case = c->combine(c2.value()); new_case.has_value()) {
-                        if (new_case->get_value() > max_) {
-                            max_ = new_case->get_value();
-                        }
-
                         cases_.emplace(coordinates, new_case);
                         j = k;
                         std::optional<Case> empty;
@@ -131,24 +120,40 @@ void Grille::swipe_horizontally(const bool right) {
     }
 }
 
-void Grille::insert_new_value() {
+unsigned long Grille::insert_new_value() {
     bool found = false;
+    unsigned long newValue = 0;
     while (!found) {
         std::random_device rd;
         std::mt19937 mt(rd());
-        std::uniform_real_distribution<> dist(1, std::nextafter(0, DBL_MAX));
+        std::uniform_real_distribution<> dist(1, 2);
         const int x = static_cast<int>(round(dist(mt))) % width_;
         const int y = static_cast<int>(round(dist(mt))) % height_;
 
         if (std::optional<Case> c = cases_.at(Coordinates(x, y)); !c.has_value()) {
             found = true;
-            const long newValue = std::pow(
-                2, static_cast<int>(round(dist(mt))) % static_cast<int>(round(log2(max_))) + 1);
+            newValue = static_cast<int>(round(dist(mt))) % 2 + 1;
             Case newCase(newValue);
             cases_.erase(Coordinates(x, y));
             cases_.emplace(Coordinates(x, y), newCase);
         }
     }
+    return newValue;
+}
+
+unsigned int Grille::get_width() const {
+    return width_;
+}
+
+unsigned int Grille::get_height() const {
+    return height_;
+}
+
+unsigned long Grille::init() {
+    const unsigned long v1 = insert_new_value();
+    const unsigned long v2 = insert_new_value();
+
+    return std::max(v1, v2);
 }
 
 void Grille::check_for_loose() {
@@ -163,22 +168,5 @@ void Grille::check_for_loose() {
     if (size == height_ * width_) {
         // loose
     } else {
-
     }
-}
-
-std::ostream &operator<<(std::ostream &os, const Grille &g) {
-    for (int i = 0; i < g.height_; i++) {
-        for (int j = 0; j < g.width_; j++) {
-            Coordinates coordinates(j, i);
-
-            if (std::optional<Case> c = g.cases_.at(coordinates); c.has_value()) {
-                os << std::to_string(c.value().get_value());
-            } else {
-                os << "#";
-            }
-        }
-        os << std::endl;
-    }
-    return os;
 }

@@ -1,9 +1,7 @@
 //
 // Created by sacha on 17/11/2025.
 //
-
-#ifndef TD2_IVUE_H
-#define TD2_IVUE_H
+#pragma once
 
 #include "../Model/Direction.h"
 
@@ -12,9 +10,6 @@ public:
     virtual ~IVue() = default;
 
 private:
-    virtual void move(Direction direction);
-    virtual void Display();
+    virtual void move(Direction direction) = 0;
+    virtual void Display() = 0;
 };
-
-
-#endif //TD2_IVUE_H

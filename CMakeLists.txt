@@ -11,12 +11,18 @@ add_executable(TD2 main.cpp
         Model/Grille.h
         Model/Coordinates.cpp
         Model/Coordinates.h
-        ViewModel/GrilleVM.cpp
-        ViewModel/GrilleVM.h
-        ViewModel/CaseVM.cpp
-        ViewModel/CaseVM.h
         Vue/IVue.cpp
         Vue/IVue.h
         Vue/ConsoleVue.cpp
         Vue/ConsoleVue.h
+        Model/Game.cpp
+        Model/Game.h
+        ViewModel/GameVM.cpp
+        ViewModel/GameVM.h
+        Vue/Game/ConsoleGame.cpp
+        Vue/Game/ConsoleGame.h
+        Vue/Game/ConsoleGrille.cpp
+        Vue/Game/ConsoleGrille.h
+        ViewModel/GrilleVM.cpp
+        ViewModel/GrilleVM.h
 )

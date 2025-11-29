@@ -1,23 +1,18 @@
 //
 // Created by sacha on 18/11/2025.
 //
+#pragma once
 
-#ifndef TD2_CONSOLEVUE_H
-#define TD2_CONSOLEVUE_H
 #include "IVue.h"
-#include "../ViewModel/GrilleVM.h"
+#include "../ViewModel/GameVM.h"
 
 
 class ConsoleVue : IVue {
-private:
-    GrilleVM grille;
+    GameVM game_;
 
 public:
-    ConsoleVue();
+    explicit ConsoleVue(const GameVM &game);
     void move(Direction direction) override;
 
     void Display() override;
 };
-
-
-#endif //TD2_CONSOLEVUE_H
