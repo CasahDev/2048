@@ -6,6 +6,8 @@
 #include <termios.h>    // struct termios, tcgetattr, tcsetattr, etc.
 #include <stdio.h>
 
+#include "Model/GameState.h"
+
 int main() {
 
     Game g;
@@ -15,7 +17,6 @@ int main() {
     ConsoleVue vue(game_vm);
 
     vue.display();
-    bool lost = false;
 
     termios t{};
 
@@ -31,7 +32,8 @@ int main() {
         perror("tcsetattr");
     }
 
-    while (!lost) {
+    GameState state = GameState::Pending;
+    while (state == GameState::Pending) {
         char key = 0;
         if (read(STDIN_FILENO, &key, 1) == 1) {
             std::optional<Direction> direction;
@@ -49,6 +51,7 @@ int main() {
                 case 'd':
                     direction = Direction::Right;
                     break;
+                default: break;
             }
 
             if (direction.has_value()) {
@@ -56,12 +59,26 @@ int main() {
 
                 vue.display();
 
-                lost = vue.check_for_loose();
+                if (vue.check_for_loose()) {
+                    state = GameState::Lost;
+                }
+                if (vue.check_for_win()) {
+                    state = GameState::Won;
+                }
             }
         }
     }
 
-    vue.display_lost();
+    switch (state) {
+        case GameState::Lost:
+            vue.display_lost();
+            break;
+        case GameState::Won:
+            vue.display_won();
+            break;
+        default:
+            break;
+    }
 
     return 0;
 }

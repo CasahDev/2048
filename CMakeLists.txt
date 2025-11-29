@@ -25,4 +25,5 @@ add_executable(TD2 main.cpp
         Vue/Game/ConsoleGrille.h
         ViewModel/GrilleVM.cpp
         ViewModel/GrilleVM.h
+        Model/GameState.h
 )
