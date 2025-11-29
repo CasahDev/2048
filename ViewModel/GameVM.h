@@ -15,4 +15,8 @@ public:
 
     GrilleVM get_grille() const;
     unsigned long get_score() const;
+
+    void swipe(Direction direction);
+
+    bool check_for_loose() const;
 };

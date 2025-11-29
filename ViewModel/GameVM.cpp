@@ -20,3 +20,11 @@ unsigned long GameVM::get_score() const {
     return static_cast<unsigned long>(pow(2, game_.get_score()));
 }
 
+void GameVM::swipe(const Direction direction) {
+    game_.swipe(direction);
+}
+
+bool GameVM::check_for_loose() const {
+    return game_.check_for_loose();
+}
+
