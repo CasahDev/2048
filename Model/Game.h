@@ -19,4 +19,6 @@ public:
 
     Grille get_grille() const;
     unsigned long get_score() const;
+
+    bool check_for_win() const;
 };

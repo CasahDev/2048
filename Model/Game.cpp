@@ -13,7 +13,7 @@ Game::Game() : grille_(4, 4) {
 }
 
 void Game::swipe(const Direction direction) {
-    grille_.move(direction);
+    if (const int value = grille_.move(direction); value > score_) score_ = value;
 
     grille_.insert_new_value();
 }
@@ -65,4 +65,8 @@ Grille Game::get_grille() const {
 
 unsigned long Game::get_score() const {
     return score_;
+}
+
+bool Game::check_for_win() const {
+    return score_ > 10;
 }
