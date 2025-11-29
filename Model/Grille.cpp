@@ -105,21 +105,24 @@ std::unordered_map<Coordinates, std::optional<Case> > Grille::get_cases() const 
 }
 
 unsigned long Grille::insert_new_value() {
-    bool found = false;
-    unsigned long newValue = 0;
-    while (!found) {
-        std::random_device rd;
-        std::mt19937 mt(rd());
-        std::uniform_real_distribution<> dist(0, std::max(width_, height_));
-        const unsigned int x = static_cast<unsigned int>(round(dist(mt))) % width_;
-        const unsigned int y = static_cast<unsigned int>(round(dist(mt))) % height_;
 
-        if (std::optional<Case> c = cases_.at(Coordinates(x, y)); !c.has_value()) {
-            found = true;
-            newValue = static_cast<int>(round(dist(mt))) % 2 + 1;
-            Case newCase(newValue);
-            cases_.erase(Coordinates(x, y));
-            cases_.emplace(Coordinates(x, y), newCase);
+    unsigned long newValue = 0;
+    if (has_space()) {
+        bool found = false;
+        while (!found) {
+            std::random_device rd;
+            std::mt19937 mt(rd());
+            std::uniform_real_distribution<> dist(0, std::max(width_, height_));
+            const unsigned int x = static_cast<unsigned int>(round(dist(mt))) % width_;
+            const unsigned int y = static_cast<unsigned int>(round(dist(mt))) % height_;
+
+            if (std::optional<Case> c = cases_.at(Coordinates(x, y)); !c.has_value()) {
+                found = true;
+                newValue = static_cast<int>(round(dist(mt))) % 2 + 1;
+                Case newCase(newValue);
+                cases_.erase(Coordinates(x, y));
+                cases_.emplace(Coordinates(x, y), newCase);
+            }
         }
     }
     return newValue;
@@ -138,4 +141,18 @@ unsigned long Grille::init() {
     const unsigned long v2 = insert_new_value();
 
     return std::max(v1, v2);
+}
+
+bool Grille::has_space() const {
+    bool space = false;
+    for (int i = 0; i < height_; i++) {
+        for (int j = 0; j < width_; j++) {
+            Coordinates pos(i, j);
+            if (!cases_.at(pos).has_value()) {
+                space = true;
+            }
+        }
+    }
+
+    return space;
 }
