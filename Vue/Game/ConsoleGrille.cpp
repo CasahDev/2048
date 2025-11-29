@@ -23,6 +23,7 @@ std::ostream & operator<<(std::ostream &os, const ConsoleGrille &g) {
             } else {
                 os << "#";
             }
+            os << "\t";
         }
         os << std::endl;
     }
