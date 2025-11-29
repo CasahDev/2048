@@ -14,8 +14,11 @@ public:
     explicit ConsoleVue(const GameVM &game);
     void move(Direction direction) override;
 
-    void display() override;
+    void display() const override;
 
-    bool check_for_loose() override;
-    void display_lost() override;
+    bool check_for_loose() const override;
+    void display_lost() const override;
+    void display_won() const override;
+
+    bool check_for_win() const override;
 };

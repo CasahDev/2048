@@ -5,6 +5,7 @@
 #include "ConsoleVue.h"
 
 #include <iostream>
+#include <cmath>
 
 #include "Game/ConsoleGame.h"
 
@@ -15,15 +16,24 @@ void ConsoleVue::move(const Direction direction) {
     game_.swipe(direction);
 }
 
-void ConsoleVue::display() {
+void ConsoleVue::display() const{
     ConsoleGame game(game_);
     std::cout << game;
 }
 
-bool ConsoleVue::check_for_loose() {
+bool ConsoleVue::check_for_loose() const {
     return game_.check_for_loose();
 }
 
-void ConsoleVue::display_lost() {
-    std::cout << "Partie perdue !";
+void ConsoleVue::display_lost() const {
+    std::cout << "Partie perdue !" << std::endl;
+    std::cout << "Score final: " << game_.get_score();
+}
+
+void ConsoleVue::display_won() const {
+    std::cout << "Félicitation, vous avez attends le score de 2048 !";
+}
+
+bool ConsoleVue::check_for_win() const {
+    return game_.check_for_win();
 }

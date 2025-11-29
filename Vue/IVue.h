@@ -11,7 +11,9 @@ public:
 
 private:
     virtual void move(Direction direction) = 0;
-    virtual void display() = 0;
-    virtual bool check_for_loose() = 0;
-    virtual void display_lost() = 0;
+    virtual void display() const = 0;
+    virtual bool check_for_loose() const = 0;
+    virtual void display_lost() const = 0;
+    virtual void display_won() const = 0;
+    virtual bool check_for_win() const = 0;
 };
