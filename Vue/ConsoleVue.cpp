@@ -11,10 +11,19 @@
 ConsoleVue::ConsoleVue(const GameVM &game) : game_(std::move(game)) {
 }
 
-void ConsoleVue::move(Direction direction) {
+void ConsoleVue::move(const Direction direction) {
+    game_.swipe(direction);
 }
 
-void ConsoleVue::Display() {
+void ConsoleVue::display() {
     ConsoleGame game(game_);
     std::cout << game;
+}
+
+bool ConsoleVue::check_for_loose() {
+    return game_.check_for_loose();
+}
+
+void ConsoleVue::display_lost() {
+    std::cout << "Partie perdue !";
 }

@@ -11,5 +11,7 @@ public:
 
 private:
     virtual void move(Direction direction) = 0;
-    virtual void Display() = 0;
+    virtual void display() = 0;
+    virtual bool check_for_loose() = 0;
+    virtual void display_lost() = 0;
 };
