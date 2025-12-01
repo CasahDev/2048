@@ -16,9 +16,9 @@ public:
     Game();
     void swipe(Direction direction);
     bool check_for_loose() const;
+    bool check_for_win() const;
 
     Grid get_grille() const;
     unsigned long get_score() const;
 
-    bool check_for_win() const;
 };
