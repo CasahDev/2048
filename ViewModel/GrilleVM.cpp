@@ -7,7 +7,7 @@
 GrilleVM::GrilleVM(Grid grille) : grille_(std::move(grille)) {
 }
 
-std::unordered_map<Coordinates, std::optional<Case> > GrilleVM::get_cases() const {
+std::unordered_map<Coordinates, std::optional<Box> > GrilleVM::get_cases() const {
     return grille_.get_cases();
 }
 

@@ -8,7 +8,7 @@
 #include <unordered_map>
 #include <vector>
 
-#include "Case.h"
+#include "Box.h"
 #include "Coordinates.h"
 #include "Direction.h"
 
@@ -16,7 +16,7 @@
 class Grid {
     unsigned int width_;
     unsigned int height_;
-    std::unordered_map<Coordinates, std::optional<Case>> cases_;
+    std::unordered_map<Coordinates, std::optional<Box>> cases_;
 
     unsigned long swipe(int outer_limit, int inner_limit, bool pack_to_start,
                         const std::function<Coordinates(int, int)> &get_coords);
@@ -31,5 +31,5 @@ public:
 
     unsigned int get_width() const;
     unsigned int get_height() const;
-    std::unordered_map<Coordinates, std::optional<Case>> get_cases() const;
+    std::unordered_map<Coordinates, std::optional<Box>> get_cases() const;
 };

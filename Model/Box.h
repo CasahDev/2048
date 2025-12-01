@@ -7,11 +7,11 @@
 #include <optional>
 
 
-class Case {
+class Box {
     unsigned long value_;
 
 public:
-    explicit Case(unsigned long v);
+    explicit Box(unsigned long v);
     [[nodiscard]] unsigned long get_value() const;
-    [[nodiscard]] std::optional<Case> combine(Case c) const;
+    [[nodiscard]] std::optional<Box> combine(Box c) const;
 };

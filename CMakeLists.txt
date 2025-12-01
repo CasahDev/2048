@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(TD2 main.cpp
         Model/Direction.h
-        Model/Case.cpp
-        Model/Case.h
+        Model/Box.cpp
+        Model/Box.h
         Model/Grid.cpp
         Model/Grid.h
         Model/Coordinates.cpp
