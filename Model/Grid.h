@@ -31,5 +31,6 @@ public:
 
     unsigned int get_width() const;
     unsigned int get_height() const;
-    std::unordered_map<Coordinates, std::optional<Box>> get_cases() const;
+
+    const std::unordered_map<Coordinates, std::optional<Box>> &get_cases() const;
 };

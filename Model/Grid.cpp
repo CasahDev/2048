@@ -15,7 +15,7 @@ Grid::Grid(const unsigned int width, const unsigned int height) : width_(width),
     for (int i = 0; i < height_; i++) {
         for (int j = 0; j < width_; j++) {
             Coordinates coordinates(j, i);
-            std::optional<Case> c;
+            std::optional<Box> c;
             cases_.emplace(coordinates, c);
         }
     }
@@ -63,7 +63,7 @@ unsigned long Grid::swipe(const int outer_limit, const int inner_limit, const bo
                 int k = j + step;
 
                 // Recherche du prochain voisin non vide
-                std::optional<Case> neighbor;
+                std::optional<Box> neighbor;
                 Coordinates neighborPos(0, 0); // Placeholder
                 bool found = false;
                 while (k != end && found == false) {
@@ -79,7 +79,7 @@ unsigned long Grid::swipe(const int outer_limit, const int inner_limit, const bo
                         cases_.erase(currentPos);
                         cases_.emplace(currentPos, new_case);
                         cases_.erase(neighborPos);
-                        cases_.emplace(neighborPos, std::optional<Case>{}); // Vider l'ancienne case
+                        cases_.emplace(neighborPos, std::optional<Box>{}); // Vider l'ancienne case
                         j = k - step; // Optimisation pour sauter le cas traité si nécessaire
                     }
                 }
@@ -97,7 +97,7 @@ unsigned long Grid::swipe(const int outer_limit, const int inner_limit, const bo
                     cases_.erase(targetPos);
                     cases_.emplace(targetPos, c);
                     cases_.erase(readPos);
-                    cases_.emplace(readPos, std::optional<Case>{});
+                    cases_.emplace(readPos, std::optional<Box>{});
                 }
                 writePos += step;
             }
@@ -107,7 +107,7 @@ unsigned long Grid::swipe(const int outer_limit, const int inner_limit, const bo
     return maxCombinedValue;
 }
 
-std::unordered_map<Coordinates, std::optional<Case> > Grid::get_cases() const {
+const std::unordered_map<Coordinates, std::optional<Box>> &Grid::get_cases() const {
     return cases_;
 }
 
@@ -123,10 +123,10 @@ unsigned long Grid::insert_new_value() {
             const unsigned int x = static_cast<unsigned int>(round(dist(mt))) % width_;
             const unsigned int y = static_cast<unsigned int>(round(dist(mt))) % height_;
 
-            if (std::optional<Case> c = cases_.at(Coordinates(x, y)); !c.has_value()) {
+            if (std::optional<Box> c = cases_.at(Coordinates(x, y)); !c.has_value()) {
                 found = true;
                 newValue = static_cast<int>(round(dist(mt))) % 2 + 1;
-                Case newCase(newValue);
+                Box newCase(newValue);
                 cases_.erase(Coordinates(x, y));
                 cases_.emplace(Coordinates(x, y), newCase);
             }

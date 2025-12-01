@@ -16,6 +16,7 @@ void Game::swipe(const Direction direction) {
     if (const int value = grille_.move(direction); value > score_) score_ = value;
 
     grille_.insert_new_value();
+    notify_grid_changed();
 }
 
 bool Game::check_for_loose() const {
@@ -59,7 +60,7 @@ bool Game::check_for_loose() const {
     return size == grille_.get_height() * grille_.get_width() && !can_combine;
 }
 
-Grid Game::get_grille() const {
+const Grid &Game::get_grille() const {
     return grille_;
 }
 

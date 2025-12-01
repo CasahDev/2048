@@ -8,7 +8,7 @@
 
 #include "GrilleVM.h"
 
-GameVM::GameVM(Game game) : game_(std::move(game)){
+GameVM::GameVM(Game &game) : game_(game){
 }
 
 GrilleVM GameVM::get_grille() const {
@@ -30,5 +30,9 @@ bool GameVM::check_for_loose() const {
 
 bool GameVM::check_for_win() const {
     return game_.check_for_win();
+}
+
+void GameVM::grid_changed() {
+    notify_grid_changed();
 }
 

@@ -26,4 +26,7 @@ add_executable(TD2 main.cpp
         ViewModel/GrilleVM.cpp
         ViewModel/GrilleVM.h
         Model/GameState.h
+        Model/Observable.cpp
+        Model/Observable.h
+        Model/Observer.h
 )

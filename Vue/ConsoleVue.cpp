@@ -13,7 +13,7 @@
 #include "../Model/GameState.h"
 #include "Game/ConsoleGame.h"
 
-ConsoleVue::ConsoleVue(const GameVM &game) : game_(std::move(game)) {
+ConsoleVue::ConsoleVue(const GameVM &game) : game_(game) {
     termios t{};
 
     if (tcgetattr(STDIN_FILENO, &t) == -1) {
@@ -53,6 +53,17 @@ void ConsoleVue::display_won() const {
 
 bool ConsoleVue::check_for_win() const {
     return game_.check_for_win();
+}
+
+void ConsoleVue::grid_changed() {
+    display();
+
+    if (check_for_loose()) {
+        display_lost();
+    }
+    if (check_for_win()) {
+        display_won();
+    }
 }
 
 void ConsoleVue::read_input() {

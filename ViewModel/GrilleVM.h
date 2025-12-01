@@ -8,10 +8,10 @@
 #include "../Model/Grid.h"
 
 class GrilleVM {
-    Grid grille_;
+    const Grid &grille_;
 
 public:
-    GrilleVM(Grid grille);
+    GrilleVM(const Grid &grille);
     
     unsigned int get_width() const;
     unsigned int get_height() const;

@@ -6,8 +6,7 @@
 #include "IVue.h"
 #include "../ViewModel/GameVM.h"
 
-
-class ConsoleVue : IVue {
+class ConsoleVue : public IVue, public Observer {
     GameVM game_;
 
 public:
