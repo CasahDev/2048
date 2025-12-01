@@ -2,7 +2,7 @@
 // Created by sacha on 17/11/2025.
 //
 
-#include "Grille.h"
+#include "Grid.h"
 
 #include <cfloat>
 #include <complex>
@@ -11,7 +11,7 @@
 #include <random>
 #include <ranges>
 
-Grille::Grille(const unsigned int width, const unsigned int height) : width_(width), height_(height) {
+Grid::Grid(const unsigned int width, const unsigned int height) : width_(width), height_(height) {
     for (int i = 0; i < height_; i++) {
         for (int j = 0; j < width_; j++) {
             Coordinates coordinates(j, i);
@@ -21,7 +21,7 @@ Grille::Grille(const unsigned int width, const unsigned int height) : width_(wid
     }
 }
 
-unsigned long Grille::move(const Direction direction) {
+unsigned long Grid::move(const Direction direction) {
     unsigned long maxCombinedValue;
     if (direction == Direction::Up || direction == Direction::Down) {
         maxCombinedValue = swipe(width_, height_, direction == Direction::Up,
@@ -41,7 +41,7 @@ unsigned long Grille::move(const Direction direction) {
     return maxCombinedValue;
 }
 
-unsigned long Grille::swipe(const int outer_limit, const int inner_limit, const bool pack_to_start,
+unsigned long Grid::swipe(const int outer_limit, const int inner_limit, const bool pack_to_start,
                             const std::function<Coordinates(int, int)> &get_coords) {
 
     unsigned long maxCombinedValue = 0;
@@ -107,11 +107,11 @@ unsigned long Grille::swipe(const int outer_limit, const int inner_limit, const 
     return maxCombinedValue;
 }
 
-std::unordered_map<Coordinates, std::optional<Case> > Grille::get_cases() const {
+std::unordered_map<Coordinates, std::optional<Case> > Grid::get_cases() const {
     return cases_;
 }
 
-unsigned long Grille::insert_new_value() {
+unsigned long Grid::insert_new_value() {
 
     unsigned long newValue = 0;
     if (has_space()) {
@@ -135,22 +135,22 @@ unsigned long Grille::insert_new_value() {
     return newValue;
 }
 
-unsigned int Grille::get_width() const {
+unsigned int Grid::get_width() const {
     return width_;
 }
 
-unsigned int Grille::get_height() const {
+unsigned int Grid::get_height() const {
     return height_;
 }
 
-unsigned long Grille::init() {
+unsigned long Grid::init() {
     const unsigned long v1 = insert_new_value();
     const unsigned long v2 = insert_new_value();
 
     return std::max(v1, v2);
 }
 
-bool Grille::has_space() const {
+bool Grid::has_space() const {
     bool space = false;
     for (int i = 0; i < height_; i++) {
         for (int j = 0; j < width_; j++) {

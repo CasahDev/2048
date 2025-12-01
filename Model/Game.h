@@ -4,12 +4,12 @@
 
 #pragma once
 
-#include "Grille.h"
+#include "Grid.h"
 
 
 class Game {
 protected:
-    Grille grille_;
+    Grid grille_;
     unsigned long score_;
 
 public:
@@ -17,7 +17,7 @@ public:
     void swipe(Direction direction);
     bool check_for_loose() const;
 
-    Grille get_grille() const;
+    Grid get_grille() const;
     unsigned long get_score() const;
 
     bool check_for_win() const;

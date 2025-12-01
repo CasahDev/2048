@@ -5,13 +5,13 @@
 #ifndef TD2_GRILLEVM_H
 #define TD2_GRILLEVM_H
 
-#include "../Model/Grille.h"
+#include "../Model/Grid.h"
 
 class GrilleVM {
-    Grille grille_;
+    Grid grille_;
 
 public:
-    GrilleVM(Grille grille);
+    GrilleVM(Grid grille);
     
     unsigned int get_width() const;
     unsigned int get_height() const;

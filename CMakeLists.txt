@@ -7,8 +7,8 @@ add_executable(TD2 main.cpp
         Model/Direction.h
         Model/Case.cpp
         Model/Case.h
-        Model/Grille.cpp
-        Model/Grille.h
+        Model/Grid.cpp
+        Model/Grid.h
         Model/Coordinates.cpp
         Model/Coordinates.h
         Vue/IVue.cpp

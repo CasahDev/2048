@@ -59,7 +59,7 @@ bool Game::check_for_loose() const {
     return size == grille_.get_height() * grille_.get_width() && !can_combine;
 }
 
-Grille Game::get_grille() const {
+Grid Game::get_grille() const {
     return grille_;
 }
 

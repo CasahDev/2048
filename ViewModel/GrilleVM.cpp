@@ -4,7 +4,7 @@
 
 #include "GrilleVM.h"
 
-GrilleVM::GrilleVM(Grille grille) : grille_(std::move(grille)) {
+GrilleVM::GrilleVM(Grid grille) : grille_(std::move(grille)) {
 }
 
 std::unordered_map<Coordinates, std::optional<Case> > GrilleVM::get_cases() const {

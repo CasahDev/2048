@@ -13,7 +13,7 @@
 #include "Direction.h"
 
 
-class Grille {
+class Grid {
     unsigned int width_;
     unsigned int height_;
     std::unordered_map<Coordinates, std::optional<Case>> cases_;
@@ -22,7 +22,7 @@ class Grille {
                         const std::function<Coordinates(int, int)> &get_coords);
     bool has_space() const;
 public:
-    Grille(unsigned int width, unsigned int height);
+    Grid(unsigned int width, unsigned int height);
     unsigned long init();
 
 

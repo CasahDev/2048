@@ -5,7 +5,7 @@
 #ifndef TD2_CONSOLEGRILLE_H
 #define TD2_CONSOLEGRILLE_H
 
-#include "../../Model/Grille.h"
+#include "../../Model/Grid.h"
 #include "../../ViewModel/GrilleVM.h"
 
 class ConsoleGrille {
