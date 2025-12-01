@@ -3,3 +3,11 @@
 //
 
 #include "IVue.h"
+
+[[noreturn]] void IVue::run() {
+    display();
+
+    while (true) {
+        read_input();
+    }
+}

@@ -21,4 +21,8 @@ public:
     void display_won() const override;
 
     bool check_for_win() const override;
+
+    void grid_changed() override;
+
+    void read_input() override;
 };
